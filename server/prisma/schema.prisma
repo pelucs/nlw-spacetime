@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+//TABELA DO USUÁRIO (DADOS DO USUÁRIO)
+model User {
+  id        String @unique @default(uuid())
+  githubId  Int    @unique
+  name      String
+  login     String
+  avatarURL String
+
+  memories Memory[]
+}
+
+//TABELA DAS MEMÓRIAS (DADOS DA MEMÓRIA)
+model Memory {
+  id     String @unique @default(uuid())
+  userId String
+
+  coverUrl  String
+  content   String
+  isPublic  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  //TODA MEMÓRIA TEM RELAÇÃO COM O USUÁRIO
+  user User @relation(fields: [userId], references: [id])
+}

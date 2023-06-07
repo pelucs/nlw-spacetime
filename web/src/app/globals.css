@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  -webki-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.centralized{
+  @apply flex items-center justify-center
+}
